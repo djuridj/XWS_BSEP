@@ -9,13 +9,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -66,6 +70,11 @@ public class Faktura {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "maticnaFaktura")
 	@JsonManagedReference
 	private Set<FakturaStavke> stavke = new HashSet<FakturaStavke>();
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "mat_fp_id", referencedColumnName = "id")
+	@JsonBackReference
+	private FirmePrenos matFP;
 	
 	public Faktura() {
 		// TODO Auto-generated constructor stub
@@ -248,6 +257,14 @@ public class Faktura {
 
 	public void setStavke(Set<FakturaStavke> stavke) {
 		this.stavke = stavke;
+	}
+
+	public FirmePrenos getMatFP() {
+		return matFP;
+	}
+
+	public void setMatFP(FirmePrenos matFP) {
+		this.matFP = matFP;
 	}
 	
 	

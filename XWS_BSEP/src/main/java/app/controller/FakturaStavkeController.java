@@ -17,7 +17,7 @@ import app.service.FakturaService;
 import app.service.FakturaStavkeService;
 
 @RestController
-@RequestMapping("/fakture/{id}/stavke")
+@RequestMapping("/fakture/{fakturaId}/stavke")
 public class FakturaStavkeController {
 	
 	@Autowired
@@ -31,7 +31,7 @@ public class FakturaStavkeController {
 		return fsService.getAllByFaktura(fakturaId);
 	}
 	
-	@RequestMapping(value = "/{id}",
+	@RequestMapping(value = "/{rednibroj}",
 				method = RequestMethod.GET)
 	public ResponseEntity<FakturaStavke> getById(@PathVariable int fakturaId, @PathVariable int rednibroj) {
 		FakturaStavke fs = fsService.getOneById(fakturaId, rednibroj);

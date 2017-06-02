@@ -8,7 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "stavke_fakture")
@@ -37,8 +38,8 @@ public class FakturaStavke {
 	@Column(unique=false, nullable=false)
 	private double ukupan_porez;
 	
-	@ManyToOne(optional=false)
-	@NotNull
+	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name= "maticna_faktura_id", referencedColumnName = "id")
 	private Faktura maticnaFaktura;
 	
@@ -47,11 +48,11 @@ public class FakturaStavke {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FakturaStavke(int redni_broj, String naziv_robe_ili_usluge, double kolicina, String jedinica_mere,
+	public FakturaStavke(int rednibroj, String naziv_robe_ili_usluge, double kolicina, String jedinica_mere,
 			double jedinicna_cena, double vrednost, double procenat_rabata, double iznos_rabata,
 			double umanjeno_za_rabat, double ukupan_porez) {
 		super();
-		this.rednibroj = redni_broj;
+		this.rednibroj = rednibroj;
 		this.naziv_robe_ili_usluge = naziv_robe_ili_usluge;
 		this.kolicina = kolicina;
 		this.jedinica_mere = jedinica_mere;
@@ -63,12 +64,12 @@ public class FakturaStavke {
 		this.ukupan_porez = ukupan_porez;
 	}
 
-	public int getRedni_broj() {
+	public int getRednibroj() {
 		return rednibroj;
 	}
 
-	public void setRedni_broj(int redni_broj) {
-		this.rednibroj = redni_broj;
+	public void setRednibroj(int rednibroj) {
+		this.rednibroj = rednibroj;
 	}
 
 	public String getNaziv_robe_ili_usluge() {
@@ -141,14 +142,6 @@ public class FakturaStavke {
 
 	public void setUkupan_porez(double ukupan_porez) {
 		this.ukupan_porez = ukupan_porez;
-	}
-
-	public int getRednibroj() {
-		return rednibroj;
-	}
-
-	public void setRednibroj(int rednibroj) {
-		this.rednibroj = rednibroj;
 	}
 
 	public Faktura getMaticnaFaktura() {
