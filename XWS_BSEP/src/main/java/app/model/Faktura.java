@@ -12,14 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -30,18 +29,6 @@ public class Faktura {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	@Column(unique=false, nullable=false)
-	private String naziv_dobavljaca;
-	@Column(unique=false, nullable=false)
-	private String adresa_dobavljaca;
-	@Column(unique=false, nullable=false)
-	private String pib_dobavljaca;
-	@Column(unique=false, nullable=false)
-	private String naziv_kupca;
-	@Column(unique=false, nullable=false)
-	private String adresa_kupca;
-	@Column(unique=false, nullable=false)
-	private String pib_kupca;
 	@Column(unique=false, nullable=false)
 	private int broj_racuna;
 	@Column(unique=false, nullable=false)
@@ -67,45 +54,31 @@ public class Faktura {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date datum_valute;
 	
+	@Column(insertable=false, updatable=false)
+	private int id_dobavljaca;
+	
+	@Column(insertable=false, updatable=false)
+	private int id_kupca;
+	
+	@ManyToOne
+	@JsonManagedReference
+	@JoinColumn(name="id_dobavljaca")
+	private Firma firma_dobavljac;
+	
+	@ManyToOne
+	@JsonManagedReference
+	@JoinColumn(name="id_kupca")
+	private Firma firma_kupac;
+	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "maticnaFaktura")
 	@JsonManagedReference
 	private Set<FakturaStavke> stavke = new HashSet<FakturaStavke>();
 	
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "mat_fp_id", referencedColumnName = "id")
-	@JsonBackReference
-	private FirmePrenos matFP;
 	
 	public Faktura() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Faktura(int id, String naziv_dobavljaca, String adresa_dobavljaca, String pib_dobavljaca,
-			String naziv_kupca, String adresa_kupca, String pib_kupca, int broj_racuna, Date datum_racuna,
-			double vrednost_robe, double vrednost_usluga, double ukupno_roba_i_usluge, double ukupan_rabat,
-			double ukupan_porez, String oznaka_valute, double iznos_za_uplatu, String uplata_na_racun,
-			Date datum_valute, HashSet<FakturaStavke> stavke) {
-		super();
-		this.id = id;
-		this.naziv_dobavljaca = naziv_dobavljaca;
-		this.adresa_dobavljaca = adresa_dobavljaca;
-		this.pib_dobavljaca = pib_dobavljaca;
-		this.naziv_kupca = naziv_kupca;
-		this.adresa_kupca = adresa_kupca;
-		this.pib_kupca = pib_kupca;
-		this.broj_racuna = broj_racuna;
-		this.datum_racuna = datum_racuna;
-		this.vrednost_robe = vrednost_robe;
-		this.vrednost_usluga = vrednost_usluga;
-		this.ukupno_roba_i_usluge = ukupno_roba_i_usluge;
-		this.ukupan_rabat = ukupan_rabat;
-		this.ukupan_porez = ukupan_porez;
-		this.oznaka_valute = oznaka_valute;
-		this.iznos_za_uplatu = iznos_za_uplatu;
-		this.uplata_na_racun = uplata_na_racun;
-		this.datum_valute = datum_valute;
-		this.stavke = stavke;
-	}
 
 	public int getId() {
 		return id;
@@ -113,54 +86,6 @@ public class Faktura {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getNaziv_dobavljaca() {
-		return naziv_dobavljaca;
-	}
-
-	public void setNaziv_dobavljaca(String naziv_dobavljaca) {
-		this.naziv_dobavljaca = naziv_dobavljaca;
-	}
-
-	public String getAdresa_dobavljaca() {
-		return adresa_dobavljaca;
-	}
-
-	public void setAdresa_dobavljaca(String adresa_dobavljaca) {
-		this.adresa_dobavljaca = adresa_dobavljaca;
-	}
-
-	public String getPib_dobavljaca() {
-		return pib_dobavljaca;
-	}
-
-	public void setPib_dobavljaca(String pib_dobavljaca) {
-		this.pib_dobavljaca = pib_dobavljaca;
-	}
-
-	public String getNaziv_kupca() {
-		return naziv_kupca;
-	}
-
-	public void setNaziv_kupca(String naziv_kupca) {
-		this.naziv_kupca = naziv_kupca;
-	}
-
-	public String getAdresa_kupca() {
-		return adresa_kupca;
-	}
-
-	public void setAdresa_kupca(String adresa_kupca) {
-		this.adresa_kupca = adresa_kupca;
-	}
-
-	public String getPib_kupca() {
-		return pib_kupca;
-	}
-
-	public void setPib_kupca(String pib_kupca) {
-		this.pib_kupca = pib_kupca;
 	}
 
 	public int getBroj_racuna() {
@@ -258,15 +183,5 @@ public class Faktura {
 	public void setStavke(Set<FakturaStavke> stavke) {
 		this.stavke = stavke;
 	}
-
-	public FirmePrenos getMatFP() {
-		return matFP;
-	}
-
-	public void setMatFP(FirmePrenos matFP) {
-		this.matFP = matFP;
-	}
-	
-	
 
 }

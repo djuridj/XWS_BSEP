@@ -49,4 +49,11 @@ public class FakturaStavkeController {
 		FakturaStavke fakts = fsService.addNew(faks);
 		return new ResponseEntity<FakturaStavke>(fakts, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "{rednibroj}",
+			method = RequestMethod.DELETE)
+	public ResponseEntity<Faktura> deleteStavka(@PathVariable int rednibroj) {
+		fsService.deleteStavka(rednibroj);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

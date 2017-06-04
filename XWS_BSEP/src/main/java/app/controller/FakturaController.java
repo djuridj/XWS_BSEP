@@ -43,4 +43,10 @@ public class FakturaController {
 		return new ResponseEntity<Faktura>(fak, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "{id}",
+			method = RequestMethod.DELETE)
+	public ResponseEntity<Faktura> deleteFaktura(@PathVariable int id) {
+		fakturaService.deleteFaktura(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

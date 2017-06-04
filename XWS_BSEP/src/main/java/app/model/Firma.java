@@ -5,13 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="firme")
@@ -26,16 +21,6 @@ public class Firma {
 	private String adresa_firme;
 	@Column(unique=true, nullable=false)
 	private String pib_firme;
-	
-	@ManyToOne
-	@JoinColumn(name="maticni_prenos_id", referencedColumnName = "id")
-	@JsonBackReference
-	private FirmePrenos matFP1;
-	
-	@ManyToOne
-	@JoinColumn(name="maticni_prenos_id2", referencedColumnName = "id")
-	@JsonBackReference
-	private FirmePrenos matFP2;
 	
 	public Firma() {
 		// TODO Auto-generated constructor stub
@@ -81,22 +66,7 @@ public class Firma {
 		this.pib_firme = pib_firme;
 	}
 
-	public FirmePrenos getMatFP1() {
-		return matFP1;
-	}
-
-	public void setMatFP1(FirmePrenos matFP1) {
-		this.matFP1 = matFP1;
-	}
-
-	public FirmePrenos getMatFP2() {
-		return matFP2;
-	}
-
-	public void setMatFP2(FirmePrenos matFP2) {
-		this.matFP2 = matFP2;
-	}
-
+	
 
 	
 }
