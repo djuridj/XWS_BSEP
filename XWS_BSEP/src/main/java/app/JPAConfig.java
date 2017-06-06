@@ -28,7 +28,7 @@ public class JPAConfig {
 	public LocalContainerEntityManagerFactoryBean emf(){
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource());
-		emf.setPackagesToScan(new String[] {"app.model"});
+		emf.setPackagesToScan(new String[] {"app.model", "app.soap.nalog_za_placanje"});
 		
 		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		emf.getJpaPropertyMap().put("hibernate.hbm2ddl.auto", "update");
