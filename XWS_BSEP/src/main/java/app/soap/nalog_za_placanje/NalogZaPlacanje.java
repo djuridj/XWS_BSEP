@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
+
 /**
  * <p>Java class for nalog_za_placanje complex type.
  * 

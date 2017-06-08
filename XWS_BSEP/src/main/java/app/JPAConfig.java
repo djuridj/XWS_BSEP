@@ -18,11 +18,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JPAConfig {
 
+	
 	@Bean
 	@ConfigurationProperties("spring.datasource")
 	public DataSource dataSource() {
 		return DataSourceBuilder.create().build();
 	}
+	
 	
 	@Bean(name = "entityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean emf(){
@@ -42,4 +44,5 @@ public class JPAConfig {
 	   tm.setEntityManagerFactory(emf().getObject());
 	   return tm;
 	}
+	
 }
