@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -30,7 +31,7 @@ public class JPAConfig {
 	public LocalContainerEntityManagerFactoryBean emf(){
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource());
-		emf.setPackagesToScan(new String[] {"app.model", "app.soap.nalog_za_placanje"});
+		emf.setPackagesToScan(new String[] {"app.model", "app.soap.nalog_za_placanje", "app.soap.rtgs_mt103", "app.soap.zaduzenje_mt900","app.soap.odobrenje_mt910"});
 		
 		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		emf.getJpaPropertyMap().put("hibernate.hbm2ddl.auto", "update");
