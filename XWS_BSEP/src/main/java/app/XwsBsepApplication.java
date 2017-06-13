@@ -10,4 +10,6 @@ public class XwsBsepApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(XwsBsepApplication.class, args);
 	}
+
+	
 }
