@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+$(document).ready(function(){
+	
+		
+	
+	$("#forma").submit(function(e){
+		var url = "http://localhost:8080/firme/";		
+		$.put(url, $("#forma").serialize(), function(data){
+			$("#table").append('<tr><td>' + data.naziv_firme + '</td><td>' + data.adresa_firme + '</td><td>' + data.pib_firme + '</td><td>' + data.email + '</td></tr>'+ data.password + '</td></tr>')
+		})
+		e.preventDefault();
+		var input_val = $("#forma").val();
+	    if(input_val != null) { 
+	       window.location.href = "FirmaIndex.html";
+	       //window.location.href = "yourpath/"+input_val;
+	    } else {
+	      //do what ever you want
+	    }
+	});
+
+});
+
+
+</script>
+<title>Registracija firme</title>
+</head>
+<body>
+
+
+Registracija
+<form id="forma">
+	Naziv Firme: <input type="text" id="naziv_firme" name="naziv_firme"><br>
+	Adresa: <input type="text" id="adresa_firme" name="adresa_firme"><br>
+	PIB: <input type="text" id="pib_firme" name="pib_firme"><br>
+	Email: <input type="text" id="email" name="email"><br>
+	Sifra: <input type="text" id="password" name="password">
+	<button id="p" type="submit">Registrujte firmu</button> <br>	
+</form>
+<br><br>
+
+
+</body>
+</html>

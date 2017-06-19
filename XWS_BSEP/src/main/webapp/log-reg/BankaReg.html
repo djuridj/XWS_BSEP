@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+$(document).ready(function(){
+	
+		
+	
+	$("#forma").submit(function(e){
+		var url = "http://localhost:8080/banke/register";		
+		$.post(url, $("#forma").serialize(), function(data){
+			$("#table").append('<tr><td>' + data.pib + '</td><td>' + data.imeBanke + '</td><td>' + data.drzava + '</td><td>' + data.adresa + '</td></tr>'+ data.swift + '</td></tr>'+ data.telefon + '</td></tr>'+ data.racun + '</td></tr>'+ data.email + '</td></tr>'+ data.password + '</td></tr>')
+		})
+		e.preventDefault();
+		var input_val = $("#forma").val();
+	    if(input_val != null) { 
+	       window.location.href = "BankaIndex.html";
+	       //window.location.href = "yourpath/"+input_val;
+	    } else {
+	      //do what ever you want
+	    }
+	});
+
+});
+
+
+</script>
+<title>Registracija banke</title>
+</head>
+<body>
+
+
+Registracija
+<form id="forma">
+	PIB: <input type="text" id="pib" name="pib"><br>
+	Naziv Banke: <input type="text" id="imeBanke" name="imeBanke"><br>
+	Drzava: <input type="text" id="drzava" name="drzava"><br>
+	Adresa: <input type="text" id="adresa" name="adresa"><br>
+	Swift: <input type="text" id="swift" name="swift"><br>
+	Telefon: <input type="text" id="telefon" name="telefon"><br>
+	Racun: <input type="text" id="racun" name="racun"><br>
+	Email: <input type="text" id="email" name="email"><br>
+	Sifra: <input type="text" id="password" name="password">
+	<button id="p" type="submit">Registrujte banku</button> <br>	
+</form>
+<br><br>
+
+
+</body>
+</html>
