@@ -11,5 +11,4 @@ public class XwsBsepApplication {
 		SpringApplication.run(XwsBsepApplication.class, args);
 	}
 
-	
 }

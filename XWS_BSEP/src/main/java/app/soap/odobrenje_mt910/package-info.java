@@ -5,5 +5,5 @@
 // Generated on: 2017.06.13 at 09:51:16 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "soap.app/nalog_za_placanje", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package app.soap.nalog_za_placanje;
+@javax.xml.bind.annotation.XmlSchema(namespace = "soap.app/odobrenje_mt910", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package app.soap.odobrenje_mt910;

@@ -6,7 +6,7 @@
 //
 
 
-package app.soap.nalog_za_placanje;
+package app.soap.zaduzenje_mt900;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nalog_za_placanje" type="{soap.app/nalog_za_placanje}nalog_za_placanje"/>
+ *         &lt;element name="id_poruke" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "nalogZaPlacanje"
+    "idPoruke"
 })
-@XmlRootElement(name = "createNalogRequest")
-public class CreateNalogRequest {
+@XmlRootElement(name = "getZaduzenjeNalogRequest")
+public class GetZaduzenjeNalogRequest {
 
-    @XmlElement(name = "nalog_za_placanje", required = true)
-    protected NalogZaPlacanje nalogZaPlacanje;
+    @XmlElement(name = "id_poruke", required = true)
+    protected String idPoruke;
 
     /**
-     * Gets the value of the nalogZaPlacanje property.
+     * Gets the value of the idPoruke property.
      * 
      * @return
      *     possible object is
-     *     {@link NalogZaPlacanje }
+     *     {@link String }
      *     
      */
-    public NalogZaPlacanje getNalogZaPlacanje() {
-        return nalogZaPlacanje;
+    public String getIdPoruke() {
+        return idPoruke;
     }
 
     /**
-     * Sets the value of the nalogZaPlacanje property.
+     * Sets the value of the idPoruke property.
      * 
      * @param value
      *     allowed object is
-     *     {@link NalogZaPlacanje }
+     *     {@link String }
      *     
      */
-    public void setNalogZaPlacanje(NalogZaPlacanje value) {
-        this.nalogZaPlacanje = value;
+    public void setIdPoruke(String value) {
+        this.idPoruke = value;
     }
 
 }

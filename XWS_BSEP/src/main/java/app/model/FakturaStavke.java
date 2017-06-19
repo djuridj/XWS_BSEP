@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -17,25 +18,26 @@ public class FakturaStavke {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Max(999)
 	@Column(name="redni_broj")
 	private int rednibroj;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, length = 120)
 	private String naziv_robe_ili_usluge;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(10,2)")
 	private double kolicina;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, length = 120)
 	private String jedinica_mere;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(10,2)")
 	private double jedinicna_cena;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(12,2)")
 	private double vrednost;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(5,2)")
 	private double procenat_rabata;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(12,2)")
 	private double iznos_rabata;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(12,2)")
 	private double umanjeno_za_rabat;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(12,2)")
 	private double ukupan_porez;
 	
 	@ManyToOne

@@ -6,7 +6,7 @@
 //
 
 
-package app.soap.nalog_za_placanje;
+package app.soap.zaduzenje_mt900;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nalog_za_placanje" type="{soap.app/nalog_za_placanje}nalog_za_placanje"/>
+ *         &lt;element name="zaduzenje_mt900" type="{soap.app/zaduzenje_mt900}zaduzenje_mt900"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "nalogZaPlacanje"
+    "zaduzenjeMt900"
 })
-@XmlRootElement(name = "createNalogRequest")
-public class CreateNalogRequest {
+@XmlRootElement(name = "createZaduzenjeNalogRequest")
+public class CreateZaduzenjeNalogRequest {
 
-    @XmlElement(name = "nalog_za_placanje", required = true)
-    protected NalogZaPlacanje nalogZaPlacanje;
+    @XmlElement(name = "zaduzenje_mt900", required = true)
+    protected ZaduzenjeMt900 zaduzenjeMt900;
 
     /**
-     * Gets the value of the nalogZaPlacanje property.
+     * Gets the value of the zaduzenjeMt900 property.
      * 
      * @return
      *     possible object is
-     *     {@link NalogZaPlacanje }
+     *     {@link ZaduzenjeMt900 }
      *     
      */
-    public NalogZaPlacanje getNalogZaPlacanje() {
-        return nalogZaPlacanje;
+    public ZaduzenjeMt900 getZaduzenjeMt900() {
+        return zaduzenjeMt900;
     }
 
     /**
-     * Sets the value of the nalogZaPlacanje property.
+     * Sets the value of the zaduzenjeMt900 property.
      * 
      * @param value
      *     allowed object is
-     *     {@link NalogZaPlacanje }
+     *     {@link ZaduzenjeMt900 }
      *     
      */
-    public void setNalogZaPlacanje(NalogZaPlacanje value) {
-        this.nalogZaPlacanje = value;
+    public void setZaduzenjeMt900(ZaduzenjeMt900 value) {
+        this.zaduzenjeMt900 = value;
     }
 
 }

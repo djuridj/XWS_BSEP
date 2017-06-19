@@ -6,7 +6,7 @@
 //
 
 
-package app.soap.nalog_za_placanje;
+package app.soap.rtgs_mt103;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nalog_za_placanje" type="{soap.app/nalog_za_placanje}nalog_za_placanje"/>
+ *         &lt;element name="rtgs_mt103" type="{soap.app/rtgs_mt103}rtgs_mt103"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "nalogZaPlacanje"
+    "rtgsMt103"
 })
-@XmlRootElement(name = "createNalogRequest")
-public class CreateNalogRequest {
+@XmlRootElement(name = "getNalogResponse")
+public class GetNalogResponse {
 
-    @XmlElement(name = "nalog_za_placanje", required = true)
-    protected NalogZaPlacanje nalogZaPlacanje;
+    @XmlElement(name = "rtgs_mt103", required = true)
+    protected RtgsMt103 rtgsMt103;
 
     /**
-     * Gets the value of the nalogZaPlacanje property.
+     * Gets the value of the rtgsMt103 property.
      * 
      * @return
      *     possible object is
-     *     {@link NalogZaPlacanje }
+     *     {@link RtgsMt103 }
      *     
      */
-    public NalogZaPlacanje getNalogZaPlacanje() {
-        return nalogZaPlacanje;
+    public RtgsMt103 getRtgsMt103() {
+        return rtgsMt103;
     }
 
     /**
-     * Sets the value of the nalogZaPlacanje property.
+     * Sets the value of the rtgsMt103 property.
      * 
      * @param value
      *     allowed object is
-     *     {@link NalogZaPlacanje }
+     *     {@link RtgsMt103 }
      *     
      */
-    public void setNalogZaPlacanje(NalogZaPlacanje value) {
-        this.nalogZaPlacanje = value;
+    public void setRtgsMt103(RtgsMt103 value) {
+        this.rtgsMt103 = value;
     }
 
 }

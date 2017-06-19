@@ -6,7 +6,7 @@
 //
 
 
-package app.soap.nalog_za_placanje;
+package app.soap.odobrenje_mt910;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nalog_za_placanje" type="{soap.app/nalog_za_placanje}nalog_za_placanje"/>
+ *         &lt;element name="odobrenje_mt910" type="{soap.app/odobrenje_mt910}odobrenje_mt910"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "nalogZaPlacanje"
+    "odobrenjeMt910"
 })
-@XmlRootElement(name = "createNalogRequest")
-public class CreateNalogRequest {
+@XmlRootElement(name = "getOdobrenjeNalogResponse")
+public class GetOdobrenjeNalogResponse {
 
-    @XmlElement(name = "nalog_za_placanje", required = true)
-    protected NalogZaPlacanje nalogZaPlacanje;
+    @XmlElement(name = "odobrenje_mt910", required = true)
+    protected OdobrenjeMt910 odobrenjeMt910;
 
     /**
-     * Gets the value of the nalogZaPlacanje property.
+     * Gets the value of the odobrenjeMt910 property.
      * 
      * @return
      *     possible object is
-     *     {@link NalogZaPlacanje }
+     *     {@link OdobrenjeMt910 }
      *     
      */
-    public NalogZaPlacanje getNalogZaPlacanje() {
-        return nalogZaPlacanje;
+    public OdobrenjeMt910 getOdobrenjeMt910() {
+        return odobrenjeMt910;
     }
 
     /**
-     * Sets the value of the nalogZaPlacanje property.
+     * Sets the value of the odobrenjeMt910 property.
      * 
      * @param value
      *     allowed object is
-     *     {@link NalogZaPlacanje }
+     *     {@link OdobrenjeMt910 }
      *     
      */
-    public void setNalogZaPlacanje(NalogZaPlacanje value) {
-        this.nalogZaPlacanje = value;
+    public void setOdobrenjeMt910(OdobrenjeMt910 value) {
+        this.odobrenjeMt910 = value;
     }
 
 }

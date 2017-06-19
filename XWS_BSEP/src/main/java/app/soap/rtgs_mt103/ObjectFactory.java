@@ -6,18 +6,15 @@
 //
 
 
-package app.soap.nalog_za_placanje;
+package app.soap.rtgs_mt103;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
-import javax.xml.namespace.QName;
 
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the app.soap.nalog_za_placanje package. 
+ * generated in the app.soap.rtgs_mt103 package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -31,21 +28,12 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Date_QNAME = new QName("soap.app/nalog_za_placanje", "date");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: app.soap.nalog_za_placanje
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: app.soap.rtgs_mt103
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link GetNalogRequest }
-     * 
-     */
-    public GetNalogRequest createGetNalogRequest() {
-        return new GetNalogRequest();
     }
 
     /**
@@ -57,28 +45,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link NalogZaPlacanje }
+     * Create an instance of {@link RtgsMt103 }
      * 
      */
-    public NalogZaPlacanje createNalogZaPlacanje() {
-        return new NalogZaPlacanje();
+    public RtgsMt103 createRtgsMt103() {
+        return new RtgsMt103();
     }
 
     /**
-     * Create an instance of {@link CreateNalogRequest }
+     * Create an instance of {@link GetRTGSNalogRequest }
      * 
      */
-    public CreateNalogRequest createCreateNalogRequest() {
-        return new CreateNalogRequest();
+    public GetRTGSNalogRequest createGetRTGSNalogRequest() {
+        return new GetRTGSNalogRequest();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link CreateRTGSNalogRequest }
      * 
      */
-    @XmlElementDecl(namespace = "soap.app/nalog_za_placanje", name = "date", defaultValue = "00-00-0000")
-    public JAXBElement<String> createDate(String value) {
-        return new JAXBElement<String>(_Date_QNAME, String.class, null, value);
+    public CreateRTGSNalogRequest createCreateRTGSNalogRequest() {
+        return new CreateRTGSNalogRequest();
     }
 
 }
