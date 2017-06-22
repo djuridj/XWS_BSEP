@@ -74,6 +74,24 @@ public class WSConfig {
 		wsdl11Definition3.setSchema(OdobrenjeMt910naloziSchema());
 		return wsdl11Definition3;
 	}
+	@Bean(value = "ZahtevZaIzvod")
+	public DefaultWsdl11Definition defaultWsdl11Definition4(XsdSchema countriesSchema) {
+		DefaultWsdl11Definition wsdl11Definition1 = new DefaultWsdl11Definition();
+		wsdl11Definition1.setPortTypeName("ZahtevPort");
+		wsdl11Definition1.setLocationUri("/wsdl");
+		wsdl11Definition1.setTargetNamespace("app.soap/zahtev_za_izvod");
+		wsdl11Definition1.setSchema(zahteviSchema());
+		return wsdl11Definition1;
+	}	
+	@Bean(value = "Izvod")
+	public DefaultWsdl11Definition defaultWsdl11Definition5(XsdSchema countriesSchema) {
+		DefaultWsdl11Definition wsdl11Definition2 = new DefaultWsdl11Definition();
+		wsdl11Definition2.setPortTypeName("IzvodPort");
+		wsdl11Definition2.setLocationUri("/wsdl");
+		wsdl11Definition2.setTargetNamespace("app.soap/izvod");
+		wsdl11Definition2.setSchema(izvodiSchema());
+		return wsdl11Definition2;
+	}
 	@Primary
 	@Bean
 	public XsdSchema naloziSchema() {
@@ -96,6 +114,14 @@ public class WSConfig {
 	public XsdSchema OdobrenjeMt910naloziSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("/seme/odobrenje_mt910.xsd"));
 	
+	}
+	@Bean
+	public XsdSchema zahteviSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("/seme/ZahtevZaIzvod.xsd"));
+	}
+	@Bean
+	public XsdSchema izvodiSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("/seme/Izvod.xsd"));
 	}
 	
 	  @Bean

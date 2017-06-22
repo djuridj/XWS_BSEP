@@ -30,7 +30,8 @@ public class JPAConfig {
 	public LocalContainerEntityManagerFactoryBean emf(){
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource());
-		emf.setPackagesToScan(new String[] {"app.model", "app.soap.nalog_za_placanje", "app.soap.rtgs_mt103", "app.soap.zaduzenje_mt900","app.soap.odobrenje_mt910"});
+		emf.setPackagesToScan(new String[] {"app.model", "app.soap.nalog_za_placanje", "app.soap.rtgs_mt103", "app.soap.zaduzenje_mt900","app.soap.odobrenje_mt910"
+											,"app.soap.zahtev_za_izvod", "app.soap.izvod"});
 		
 		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		emf.getJpaPropertyMap().put("hibernate.hbm2ddl.auto", "update");
