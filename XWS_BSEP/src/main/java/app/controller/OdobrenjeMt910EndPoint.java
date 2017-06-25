@@ -1,6 +1,7 @@
 package app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
@@ -13,7 +14,7 @@ import app.soap.odobrenje_mt910.GetOdobrenjeNalogResponse;
 import app.soap.zaduzenje_mt900.CreateZaduzenjeNalogRequest;
 import app.soap.zaduzenje_mt900.GetZaduzenjeNalogRequest;
 import app.soap.zaduzenje_mt900.GetZaduzenjeNalogResponse;
-
+@Endpoint
 public class OdobrenjeMt910EndPoint {
 	
 private static final String NAMESPACE_URI = "soap.app/odobrenje_mt910";

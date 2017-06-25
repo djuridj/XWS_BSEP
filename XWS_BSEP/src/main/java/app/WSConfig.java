@@ -73,6 +73,15 @@ public class WSConfig {
 		wsdl11Definition3.setSchema(OdobrenjeMt910naloziSchema());
 		return wsdl11Definition3;
 	}
+	@Bean(value = "ClearingMt102")
+	public DefaultWsdl11Definition defaultWsdl11Definition4(XsdSchema countriesSchema) {
+		DefaultWsdl11Definition wsdl11Definition4 = new DefaultWsdl11Definition();
+		wsdl11Definition4.setPortTypeName("ClearingNaloziPort");
+		wsdl11Definition4.setLocationUri("/wsdl");
+		wsdl11Definition4.setTargetNamespace("app.soap/clearing_mt102");
+		wsdl11Definition4.setSchema(ClearingMt102naloziSchema());
+		return wsdl11Definition4;
+	}
 	@Primary
 	@Bean
 	public XsdSchema naloziSchema() {
@@ -94,6 +103,11 @@ public class WSConfig {
 	@Bean
 	public XsdSchema OdobrenjeMt910naloziSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("/seme/odobrenje_mt910.xsd"));
+	
+	}
+	@Bean
+	public XsdSchema ClearingMt102naloziSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("/seme/clearing_mt102.xsd"));
 	
 	}
 	  @Bean
