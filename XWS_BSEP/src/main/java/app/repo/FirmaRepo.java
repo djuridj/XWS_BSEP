@@ -6,4 +6,6 @@ import app.model.Firma;
 
 public interface FirmaRepo extends CrudRepository<Firma, Integer> {
 
+	public Firma findByEmail(String email);
+	
 }

@@ -49,6 +49,10 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
@@ -56,7 +60,7 @@
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
         </dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
@@ -95,6 +99,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
                 <version>1.6</version>
+                
                 <executions>
                     <execution>
                         <id>xjc</id>
@@ -107,6 +112,7 @@
                     <schemaDirectory>${project.basedir}/src/main/resources/seme</schemaDirectory>
                     <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
                     <clearOutputDir>false</clearOutputDir>
+                    <failOnMissingWebXml>true</failOnMissingWebXml>
                 </configuration>
             </plugin>
             <!-- end::xsd[] -->

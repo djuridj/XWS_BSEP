@@ -4,7 +4,6 @@ import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -14,6 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
@@ -73,6 +74,7 @@ public class WSConfig {
 		wsdl11Definition3.setSchema(OdobrenjeMt910naloziSchema());
 		return wsdl11Definition3;
 	}
+
 	@Bean(value = "ClearingMt102")
 	public DefaultWsdl11Definition defaultWsdl11Definition4(XsdSchema countriesSchema) {
 		DefaultWsdl11Definition wsdl11Definition4 = new DefaultWsdl11Definition();
@@ -81,6 +83,26 @@ public class WSConfig {
 		wsdl11Definition4.setTargetNamespace("app.soap/clearing_mt102");
 		wsdl11Definition4.setSchema(ClearingMt102naloziSchema());
 		return wsdl11Definition4;
+	}
+
+	@Bean(value = "ZahtevZaIzvod")
+	public DefaultWsdl11Definition defaultWsdl11Definition5(XsdSchema countriesSchema) {
+		DefaultWsdl11Definition wsdl11Definition5 = new DefaultWsdl11Definition();
+		wsdl11Definition5.setPortTypeName("ZahtevPort");
+		wsdl11Definition5.setLocationUri("/wsdl");
+		wsdl11Definition5.setTargetNamespace("app.soap/zahtev_za_izvod");
+		wsdl11Definition5.setSchema(zahteviSchema());
+		return wsdl11Definition5;
+	}	
+	@Bean(value = "Izvod")
+	public DefaultWsdl11Definition defaultWsdl11Definition6(XsdSchema countriesSchema) {
+		DefaultWsdl11Definition wsdl11Definition6 = new DefaultWsdl11Definition();
+		wsdl11Definition6.setPortTypeName("IzvodPort");
+		wsdl11Definition6.setLocationUri("/wsdl");
+		wsdl11Definition6.setTargetNamespace("app.soap/izvod");
+		wsdl11Definition6.setSchema(izvodiSchema());
+		return wsdl11Definition6;
+
 	}
 	@Primary
 	@Bean
@@ -106,10 +128,21 @@ public class WSConfig {
 	
 	}
 	@Bean
+
 	public XsdSchema ClearingMt102naloziSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("/seme/clearing_mt102.xsd"));
 	
 	}
+
+	public XsdSchema zahteviSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("/seme/ZahtevZaIzvod.xsd"));
+	}
+	@Bean
+	public XsdSchema izvodiSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("/seme/Izvod.xsd"));
+	}
+	
+
 	  @Bean
 	  public EmbeddedServletContainerFactory servletContainer() {
 	    TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
@@ -137,5 +170,11 @@ public class WSConfig {
 	    
 	    return connector;
 	  }
+	  
+	    @Bean
+	    public BCryptPasswordEncoder passwordEncoder() {
+	        return new BCryptPasswordEncoder(12);
+	    }
+	  
 	  
 }

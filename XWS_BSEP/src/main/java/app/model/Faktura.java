@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -26,29 +28,32 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Faktura {
 	
 	@Id
+	@Max(50)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+	@Pattern(regexp="[0-9]{6}")
 	@Column(unique=false, nullable=false)
 	private int broj_racuna;
 	@Column(unique=false, nullable=false)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date datum_racuna;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(15,2)")
 	private double vrednost_robe;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(15,2)")
 	private double vrednost_usluga;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(15,2)")
 	private double ukupno_roba_i_usluge;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(15,2)")
 	private double ukupan_rabat;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(15,2)")
 	private double ukupan_porez;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false,  length = 3)
 	private String oznaka_valute;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, columnDefinition="Decimal(15,2)")
 	private double iznos_za_uplatu;
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false, length = 18)
+	@Pattern(regexp="[0-9]{3}-[0-9]{13}-[0-9]{2}")
 	private String uplata_na_racun;
 	@Column(unique=false, nullable=false)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
