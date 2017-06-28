@@ -14,6 +14,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import app.soap.odobrenje_mt910.OdobrenjeMt910;
+import app.soap.zaduzenje_mt900.ZaduzenjeMt900;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -36,15 +39,38 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "rtgsMt103"
+  
 })
 @XmlRootElement(name = "getNalogResponse")
 public class GetNalogResponse {
 
     @XmlElement(name = "rtgs_mt103", required = true)
     protected RtgsMt103 rtgsMt103;
+    
+    @XmlElement(name = "zaduzenje_mt900", required = true)
+    protected ZaduzenjeMt900 mt900;
+    
+    @XmlElement(name = "odobrenje_mt910", required = true)
+    protected OdobrenjeMt910 mt910;
+    
 
-    /**
+    public OdobrenjeMt910 getMt910() {
+		return mt910;
+	}
+
+	public void setMt910(OdobrenjeMt910 mt910) {
+		this.mt910 = mt910;
+	}
+
+	public ZaduzenjeMt900 getMt900() {
+		return mt900;
+	}
+
+	public void setMt900(ZaduzenjeMt900 mt900) {
+		this.mt900 = mt900;
+	}
+
+	/**
      * Gets the value of the rtgsMt103 property.
      * 
      * @return

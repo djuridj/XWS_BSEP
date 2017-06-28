@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import app.soap.clearing_mt102.ClearingMt102.PojedinacnoPlacanje;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -36,14 +38,26 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "clearingMt102"
+   // "clearingMt102"
 })
 @XmlRootElement(name = "getClearingNalogResponse")
 public class GetClearingNalogResponse {
 
-    @XmlElement(name = "clearing_mt102", required = true)
-    protected ClearingMt102 clearingMt102;
+    
 
+	@XmlElement(name = "clearing_mt102", required = true)
+    protected ClearingMt102 clearingMt102;
+    
+    @XmlElement(name ="pojedinacno_placanje", required = true)
+    protected PojedinacnoPlacanje pojedinacnoPlacanje;
+
+    public PojedinacnoPlacanje getPojedinacnoPlacanje() {
+		return pojedinacnoPlacanje;
+	}
+
+	public void setPojedinacnoPlacanje(PojedinacnoPlacanje pojedinacnoPlacanje) {
+		this.pojedinacnoPlacanje = pojedinacnoPlacanje;
+	}
     /**
      * Gets the value of the clearingMt102 property.
      * 

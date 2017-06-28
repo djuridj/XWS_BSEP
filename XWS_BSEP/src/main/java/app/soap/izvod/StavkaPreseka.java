@@ -9,6 +9,11 @@
 package app.soap.izvod;
 
 import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -81,28 +86,39 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "stavka-preseka", propOrder = {
 
 })
+@Entity
+@Table(name="stavke_preseka")
 public class StavkaPreseka {
-
+	@Id
+	@Column
     @XmlElement(name = "duznik-nalogodavac", required = true)
     protected String duznikNalogodavac;
+	@Column
     @XmlElement(name = "svrha-placanja", required = true)
     protected String svrhaPlacanja;
+	@Column
     @XmlElement(name = "primalac-poverilac", required = true)
     protected String primalacPoverilac;
+	@Column
     @XmlElement(name = "datum-naloga", required = true)
     protected String datumNaloga;
+	@Column
     @XmlElement(required = true)
     protected BigDecimal iznos;
+	@Column
     @XmlElement(name = "datum-valute", required = true)
     protected String datumValute;
+	@Column
     @XmlElement(required = true)
     protected String racunduznik;
     protected int modelduznik;
     protected int pnbd;
+    @Column
     @XmlElement(required = true)
     protected String racunpoverioc;
     protected int modelpoverioc;
     protected int pnbp;
+    @Column
     @XmlElement(required = true)
     protected String smer;
 

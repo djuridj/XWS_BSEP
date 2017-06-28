@@ -10,11 +10,18 @@ package app.soap.izvod;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
+import javax.persistence.JoinColumn;
 
 /**
  * <p>Java class for presek complex type.
@@ -39,10 +46,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "presek", propOrder = {
     "stavkaPreseka"
 })
+@Entity
+@Table(name="presek")
 public class Presek {
-
-    @XmlElement(name = "stavka-preseka")
-    protected List<StavkaPreseka> stavkaPreseka;
+	@Id
+	@Column
+	@XmlElement(name="id")
+	protected String id;
+    
+    @ElementCollection(targetClass=StavkaPreseka.class)
+    @CollectionTable(name="Stavke", joinColumns=@JoinColumn(name="id"))
+    @Column(name = "stavka_preseka")
+    protected List<StavkaPreseka> stavkaPreseka = new ArrayList<StavkaPreseka>();
 
     /**
      * Gets the value of the stavkaPreseka property.

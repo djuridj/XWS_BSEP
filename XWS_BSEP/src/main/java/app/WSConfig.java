@@ -133,7 +133,7 @@ public class WSConfig {
 		return new SimpleXsdSchema(new ClassPathResource("/seme/clearing_mt102.xsd"));
 	
 	}
-
+    @Bean
 	public XsdSchema zahteviSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("/seme/ZahtevZaIzvod.xsd"));
 	}
