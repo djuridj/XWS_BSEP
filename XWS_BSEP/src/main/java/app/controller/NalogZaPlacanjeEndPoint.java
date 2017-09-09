@@ -10,11 +10,13 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import app.model.Banka;
+import app.model.Faktura;
 import app.model.Racuni;
 import app.repo.BankaRepo;
 import app.repo.RacuniRepo;
 import app.service.BankaService;
 import app.service.ClearingMt102Service;
+import app.service.FakturaService;
 import app.service.NalogZaPlacanjeService;
 import app.service.PojedinacnoPlacanjeService;
 import app.service.RacuniService;
@@ -25,6 +27,7 @@ import app.soap.clearing_mt102.GetClearingNalogResponse;
 import app.soap.nalog_za_placanje.CreateNalogRequest;
 import app.soap.nalog_za_placanje.GetNalogRequest;
 import app.soap.nalog_za_placanje.GetNalogResponse;
+import app.soap.nalog_za_placanje.NalogZaPlacanje;
 import app.soap.rtgs_mt103.RtgsMt103;
 
 @Endpoint
@@ -39,11 +42,13 @@ public class NalogZaPlacanjeEndPoint {
 	private BankaService bs;
 	private ClearingMt102Service cmts;
 	private PojedinacnoPlacanjeService pps;
+	private FakturaService fs;
 	@Autowired
 	public RacuniRepo rrep;
 	
 	@Autowired
-	public NalogZaPlacanjeEndPoint(NalogZaPlacanjeService nzps, RacuniService rser, RtgsNalogMt103Service rmts, BankaService bs, RacuniRepo rrep, ClearingMt102Service cmts, PojedinacnoPlacanjeService pps ) {
+	public NalogZaPlacanjeEndPoint(NalogZaPlacanjeService nzps, RacuniService rser, RtgsNalogMt103Service rmts, BankaService bs, RacuniRepo rrep, ClearingMt102Service cmts, PojedinacnoPlacanjeService pps,
+			FakturaService fs) {
 		super();
 		this.nzps = nzps;
 		this.rser = rser;
@@ -52,6 +57,7 @@ public class NalogZaPlacanjeEndPoint {
 		this.rrep = rrep;
 		this.cmts = cmts;
 		this.pps = pps;
+		this.fs = fs;
 	}
 
 
@@ -67,12 +73,38 @@ public class NalogZaPlacanjeEndPoint {
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "createNalogRequest")
 	@ResponsePayload
 	public GetNalogResponse create(@RequestPayload CreateNalogRequest request) {
+		System.out.println("NO");
 		GetNalogResponse response = new GetNalogResponse();
+		System.out.println(request.getNalogZaPlacanje().getDuznikNalogodavac());
+		Faktura fak = fs.getOneById(request.getNalogZaPlacanje().getFaktura());
+		System.out.println("NO");
+		BigDecimal iznos = BigDecimal.valueOf(fak.getIznos_za_uplatu());
+		String oznakaValute = fak.getOznaka_valute();
+		String racunPoverioca = fak.getUplata_na_racun();
+		String primalac = fak.getFirma_dobavljac().getNaziv_firme();
+		NalogZaPlacanje nalogZaPlacanje = new NalogZaPlacanje();
+		nalogZaPlacanje.setIdPoruke(request.getNalogZaPlacanje().getIdPoruke());
+		nalogZaPlacanje.setBrojRacunaDuznika(request.getNalogZaPlacanje().getBrojRacunaDuznika());
+		nalogZaPlacanje.setBrojRacunaPoverioca(racunPoverioca);
 		
+		nalogZaPlacanje.setDate(request.getNalogZaPlacanje().getDate());
+		nalogZaPlacanje.setDuznikNalogodavac(request.getNalogZaPlacanje().getDuznikNalogodavac());
+		nalogZaPlacanje.setHitno(request.getNalogZaPlacanje().isHitno());
+		nalogZaPlacanje.setIznos(iznos);
+		nalogZaPlacanje.setModelOdobrenja(request.getNalogZaPlacanje().getModelOdobrenja());
+		nalogZaPlacanje.setModelZaduzenja(request.getNalogZaPlacanje().getModelZaduzenja());
+		nalogZaPlacanje.setOznakaValute(oznakaValute);
+		nalogZaPlacanje.setPozivNaBrojOdobrenja(request.getNalogZaPlacanje().getPozivNaBrojOdobrenja());
+		nalogZaPlacanje.setPozivNaBrojZaduzenja(request.getNalogZaPlacanje().getPozivNaBrojZaduzenja());
+		nalogZaPlacanje.setPrimalacPoverilac(primalac);
+		System.out.println("NO");
+		nalogZaPlacanje.setSvrhaPlacanja(request.getNalogZaPlacanje().getSvrhaPlacanja());
+		
+		response.setNalogZaPlacanje(nzps.addNew(nalogZaPlacanje));
 		// RTGS
 		app.soap.rtgs_mt103.GetNalogResponse rtgsResponse = new app.soap.rtgs_mt103.GetNalogResponse();
 		
-		response.setNalogZaPlacanje(nzps.addNew(request.getNalogZaPlacanje()));
+		
 		BigDecimal bd = new BigDecimal(250000);
 		RtgsMt103 mt103 = new RtgsMt103();
 		String brojRacunDuznika = request.getNalogZaPlacanje().getBrojRacunaDuznika();
@@ -84,7 +116,8 @@ public class NalogZaPlacanjeEndPoint {
 		//String obracunskiRacunBankeDuznika = racun.getMaticnaBanka().getRacun();
 		String obracunskiRacunBankeDuznika = matBanka.getRacun();
 		System.out.println(matBanka);
-		String brojRacunaPoverioca = request.getNalogZaPlacanje().getBrojRacunaPoverioca();
+		String brojRacunaPoverioca = racunPoverioca;
+		System.out.println("NO");
 		Racuni racunPov = rser.getOneByRacun(brojRacunaPoverioca);
 		int idBankePov = racunPov.getMaticnaBanka().getId();
 		Banka matBankaPov = bs.getById(idBankePov);
@@ -101,7 +134,7 @@ public class NalogZaPlacanjeEndPoint {
 		GetClearingNalogResponse clearingResponse = new GetClearingNalogResponse();
 		
 	  if(!swiftKodBankeDuznika.equals(swiftKodBankePoverioca)) {
-		if(request.getNalogZaPlacanje().getIznos().compareTo(bd)==1 || request.getNalogZaPlacanje().isHitno()==true){
+		if(iznos.compareTo(bd)==1 || request.getNalogZaPlacanje().isHitno()==true){
 			mt103.setIdPoruke((UUID.randomUUID().toString()));
 			mt103.setSwiftKodBankeDuznika(swiftKodBankeDuznika);
 			mt103.setObracunskiRacunBankeDuznika(obracunskiRacunBankeDuznika);
@@ -109,17 +142,18 @@ public class NalogZaPlacanjeEndPoint {
 			mt103.setObracunskiRacunBankePoverioca(obracunskiRacunBankePoverioca);
 			mt103.setDuznikNalogodavac(request.getNalogZaPlacanje().getDuznikNalogodavac());
 			mt103.setSvrhaPlacanja(request.getNalogZaPlacanje().getSvrhaPlacanja());
-			mt103.setPrimalacPoverilac(request.getNalogZaPlacanje().getPrimalacPoverilac());
+			mt103.setPrimalacPoverilac(primalac);
 			mt103.setDatumNaloga(request.getNalogZaPlacanje().getDate());
 			mt103.setDatumValute(request.getNalogZaPlacanje().getDate());
 			mt103.setBrojRacunaDuznika(request.getNalogZaPlacanje().getBrojRacunaDuznika());
 			mt103.setModelZaduzenja(request.getNalogZaPlacanje().getModelZaduzenja());
 			mt103.setPozivNaBrojZaduzenja(request.getNalogZaPlacanje().getPozivNaBrojZaduzenja());
-			mt103.setBrojRacunaPoverioca(request.getNalogZaPlacanje().getBrojRacunaPoverioca());
+			mt103.setBrojRacunaPoverioca(racunPoverioca);
 			mt103.setModelOdobrenja(request.getNalogZaPlacanje().getModelOdobrenja());
 			mt103.setPozivNaBrojOdobrenja(request.getNalogZaPlacanje().getPozivNaBrojOdobrenja());
-			mt103.setIznos(request.getNalogZaPlacanje().getIznos());
-			mt103.setSifraValute(request.getNalogZaPlacanje().getOznakaValute());
+			mt103.setIznos(iznos);
+			System.out.println("NO");
+			mt103.setSifraValute(oznakaValute);
 			
 			rtgsResponse.setRtgsMt103(rmts.addNew(mt103));
 		}else {
@@ -133,8 +167,8 @@ public class NalogZaPlacanjeEndPoint {
 			mt102.setObracunskiRacunBankeDuznika(obracunskiRacunBankeDuznika);
 			mt102.setSwiftKodBankePoverioca(swiftKodBankePoverioca);
 			mt102.setObracunskiRacunBankePoverioca(obracunskiRacunBankePoverioca);
-			mt102.setUkupanIznos(request.getNalogZaPlacanje().getIznos());
-			mt102.setSifraValute(request.getNalogZaPlacanje().getOznakaValute());
+			mt102.setUkupanIznos(iznos);
+			mt102.setSifraValute(oznakaValute);
 			mt102.setDatumValute(request.getNalogZaPlacanje().getDate());
 			mt102.setDatum(request.getNalogZaPlacanje().getDate());
 			clearingResponse.setClearingMt102(cmts.addNew(mt102));
@@ -142,16 +176,16 @@ public class NalogZaPlacanjeEndPoint {
 			pp.setIdNalogaZaPlacanje(request.getNalogZaPlacanje().getIdPoruke());
 			pp.setDuznikNalogodavac(request.getNalogZaPlacanje().getDuznikNalogodavac());
 			pp.setSvrhaPlacanja(request.getNalogZaPlacanje().getSvrhaPlacanja());
-			pp.setPrimalacPoverilac(request.getNalogZaPlacanje().getPrimalacPoverilac());
+			pp.setPrimalacPoverilac(primalac);
 			pp.setDatumNaloga(request.getNalogZaPlacanje().getDate());
 			pp.setBrojRacunaDuznika(request.getNalogZaPlacanje().getBrojRacunaDuznika());
 			pp.setModelZaduzenja(request.getNalogZaPlacanje().getModelZaduzenja());
 			pp.setPozivNaBrojZaduzenja(request.getNalogZaPlacanje().getPozivNaBrojZaduzenja());
-			pp.setBrojRacunaPoverioca(request.getNalogZaPlacanje().getBrojRacunaPoverioca());
+			pp.setBrojRacunaPoverioca(racunPoverioca);
 			pp.setModelOdobrenja(request.getNalogZaPlacanje().getModelOdobrenja());
 			pp.setPozivNaBrojOdobrenja(request.getNalogZaPlacanje().getPozivNaBrojOdobrenja());
-			pp.setIznos(request.getNalogZaPlacanje().getIznos());
-			pp.setOznakaValute(request.getNalogZaPlacanje().getOznakaValute());
+			pp.setIznos(iznos);
+			pp.setOznakaValute(oznakaValute);
 			pp.setMatClearing(mt102);
 			
 			

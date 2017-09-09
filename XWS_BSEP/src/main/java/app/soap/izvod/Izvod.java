@@ -8,14 +8,26 @@
 
 package app.soap.izvod;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import app.model.FakturaStavke;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -53,18 +65,19 @@ import javax.xml.bind.annotation.XmlType;
     "presek"
 })
 @Entity
-@Table(name="izvodi")
+@Table(name="izvod")
 public class Izvod {
 	@Id
     @Column
     @XmlElement(name = "id_poruke", required = true)
     protected String idPoruke;
-	@Column
-    @XmlElement(required = true)
-    protected String zaglavlje;
-	@Column
-    @XmlElement(required = true)
-    protected String presek;
+	@OneToOne (mappedBy="izvod")
+    protected Zaglavlje zaglavlje;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "maticniIzvod")
+	private Set<StavkaPreseka> presek = new HashSet<StavkaPreseka>();
+	
+	
 
     /**
      * Gets the value of the idPoruke property.
@@ -98,7 +111,7 @@ public class Izvod {
      *     {@link Zaglavlje }
      *     
      */
-    public String getZaglavlje() {
+    public Zaglavlje getZaglavlje() {
         return zaglavlje;
     }
 
@@ -110,7 +123,7 @@ public class Izvod {
      *     {@link Zaglavlje }
      *     
      */
-    public void setZaglavlje(String value) {
+    public void setZaglavlje(Zaglavlje value) {
         this.zaglavlje = value;
     }
 
@@ -122,20 +135,14 @@ public class Izvod {
      *     {@link Presek }
      *     
      */
-    public String getPresek() {
-        return presek;
-    }
+    
+	public Set<StavkaPreseka> getStavke() {
+		return presek;
+	}
 
-    /**
-     * Sets the value of the presek property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Presek }
-     *     
-     */
-    public void setPresek(String value) {
-        this.presek = value;
-    }
+	public void setStavke(Set<StavkaPreseka> stavke) {
+		this.presek = stavke;
+	}
+
 
 }

@@ -37,13 +37,13 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "nalogZaPlacanje"
+    "nalogZaPlacanjePoFakturi"
 })
 @XmlRootElement(name = "createNalogRequest")
 public class CreateNalogRequest {
 
     @XmlElement(name = "nalog_za_placanje", required = true)
-    protected NalogZaPlacanje nalogZaPlacanje;
+    protected NalogZaPlacanjePoFakturi nalogZaPlacanjePoFakturi;
 
     /**
      * Gets the value of the nalogZaPlacanje property.
@@ -53,8 +53,8 @@ public class CreateNalogRequest {
      *     {@link NalogZaPlacanje }
      *     
      */
-    public NalogZaPlacanje getNalogZaPlacanje() {
-        return nalogZaPlacanje;
+    public NalogZaPlacanjePoFakturi getNalogZaPlacanje() {
+        return nalogZaPlacanjePoFakturi;
     }
 
     /**
@@ -65,8 +65,8 @@ public class CreateNalogRequest {
      *     {@link NalogZaPlacanje }
      *     
      */
-    public void setNalogZaPlacanje(NalogZaPlacanje value) {
-        this.nalogZaPlacanje = value;
+    public void setNalogZaPlacanje(NalogZaPlacanjePoFakturi value) {
+        this.nalogZaPlacanjePoFakturi = value;
     }
 
 }

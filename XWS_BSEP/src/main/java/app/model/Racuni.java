@@ -60,6 +60,12 @@ public class Racuni {
 	public void setMaticnaBanka(Banka maticnaBanka) {
 		this.maticnaBanka = maticnaBanka;
 	}
+	public BigDecimal getStanje_na_racunu() {
+		return stanje_na_racunu;
+	}
+	public void setStanje_na_racunu(BigDecimal stanje_na_racunu) {
+		this.stanje_na_racunu = stanje_na_racunu;
+	}
 	
 	
 	

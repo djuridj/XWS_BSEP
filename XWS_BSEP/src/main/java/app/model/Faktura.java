@@ -189,4 +189,15 @@ public class Faktura {
 		this.stavke = stavke;
 	}
 
+
+	public Firma getFirma_dobavljac() {
+		return firma_dobavljac;
+	}
+
+
+	public void setFirma_dobavljac(Firma firma_dobavljac) {
+		this.firma_dobavljac = firma_dobavljac;
+	}
+	
+
 }

@@ -32,7 +32,7 @@ public class JPAConfig {
 		emf.setDataSource(dataSource());
 
 		emf.setPackagesToScan(new String[] {"app.model", "app.soap.nalog_za_placanje", "app.soap.rtgs_mt103", "app.soap.zaduzenje_mt900","app.soap.odobrenje_mt910"
-											,"app.soap.zahtev_za_izvod", "app.soap.izvod","app.soap.clearing_mt102"});
+											, "app.soap.izvod","app.soap.clearing_mt102"});
 
 		
 		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());

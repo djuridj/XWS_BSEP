@@ -85,15 +85,6 @@ public class WSConfig {
 		return wsdl11Definition4;
 	}
 
-	@Bean(value = "ZahtevZaIzvod")
-	public DefaultWsdl11Definition defaultWsdl11Definition5(XsdSchema countriesSchema) {
-		DefaultWsdl11Definition wsdl11Definition5 = new DefaultWsdl11Definition();
-		wsdl11Definition5.setPortTypeName("ZahtevPort");
-		wsdl11Definition5.setLocationUri("/wsdl");
-		wsdl11Definition5.setTargetNamespace("app.soap/zahtev_za_izvod");
-		wsdl11Definition5.setSchema(zahteviSchema());
-		return wsdl11Definition5;
-	}	
 	@Bean(value = "Izvod")
 	public DefaultWsdl11Definition defaultWsdl11Definition6(XsdSchema countriesSchema) {
 		DefaultWsdl11Definition wsdl11Definition6 = new DefaultWsdl11Definition();
@@ -132,10 +123,6 @@ public class WSConfig {
 	public XsdSchema ClearingMt102naloziSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("/seme/clearing_mt102.xsd"));
 	
-	}
-    @Bean
-	public XsdSchema zahteviSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("/seme/ZahtevZaIzvod.xsd"));
 	}
 	@Bean
 	public XsdSchema izvodiSchema() {

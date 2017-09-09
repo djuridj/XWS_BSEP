@@ -6,7 +6,7 @@
 //
 
 
-package app.soap.zahtev_za_izvod;
+package app.soap.izvod;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -174,5 +174,4 @@ public class ZahtevZaIzvod {
     public void setRedniBrojPreseka(int value) {
         this.redniBrojPreseka = value;
     }
-
 }
